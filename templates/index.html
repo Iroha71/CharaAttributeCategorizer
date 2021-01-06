@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>属性推論</title>
+</head>
+<body>
+  画像をアップロード
+  <form action="/" method="POST" enctype="multipart/form-data">
+    <input type="file" name="img" id="fileUploader">
+    <button type="submit">アップロードする</button>
+  </form>
+  <img id="previewImg">
+</body>
+</html>
+
+<script>
+window.onload = () => {
+  const fileUploader = document.getElementById('fileUploader')
+  const previewImg = document.getElementById('previewImg')
+  const previewImage = (e) => {
+    const fileReader = new FileReader()
+    fileReader.onload = (e) => {
+      previewImg.src = e.target.result
+    }
+    fileReader.readAsDataURL(e.target.files[0])
+  }
+  fileUploader.addEventListener('change', previewImage)
+}
+</script>
+
+<style>
+  img {
+    height: 15vh;
+    width: auto;
+    margin: 0.25rem;
+  }
+</style>
